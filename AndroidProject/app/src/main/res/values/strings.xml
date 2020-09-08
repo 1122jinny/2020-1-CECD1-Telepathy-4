@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WorkFit</string>
+    <string name="home">홈</string>
+    <string name="bar_chart">통계</string>
+    <string name="inbox">콘텐츠</string>
+    <string name="people">친구</string>
+</resources>
