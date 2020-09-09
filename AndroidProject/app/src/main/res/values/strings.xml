@@ -4,4 +4,9 @@
     <string name="bar_chart">통계</string>
     <string name="inbox">콘텐츠</string>
     <string name="people">친구</string>
+    <string name="day">일</string>
+    <string name="week">주</string>
+    <string name="month">월</string>
+    <string name="year">년</string>
+    <string name="error_message">Error, unable to fetch Fitness data. Please try again later.</string>
 </resources>
