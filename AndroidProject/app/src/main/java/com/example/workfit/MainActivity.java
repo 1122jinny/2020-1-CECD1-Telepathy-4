@@ -9,13 +9,21 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataSource;
+import com.google.android.gms.fitness.data.DataType;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import org.eazegraph.lib.charts.BarChart;
-import org.eazegraph.lib.models.BarModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +33,7 @@ public class MainActivity<itemModel> extends AppCompatActivity {
     TextView date;
     Button prevBtn, nextBtn;
 
+    // footer
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentHome fragmentHome = new FragmentHome();
     private FragmentStatistic fragmentStatistic = new FragmentStatistic();
@@ -44,18 +53,18 @@ public class MainActivity<itemModel> extends AppCompatActivity {
         prevBtn = (Button) findViewById(R.id.prev);
         nextBtn = (Button) findViewById(R.id.next);
 
-        /*if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.frame1, MainFragment.newInstance())
                     .commitNow();
-        }*/
+        }
 
         prevBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cal.add(Calendar.DATE, -1);
                 date.setText(mFormat.format(cal.getTime()));
-
+                //MainFragment.setBarChart();
             }
         });
 
@@ -64,7 +73,7 @@ public class MainActivity<itemModel> extends AppCompatActivity {
             public void onClick(View v) {
                 cal.add(Calendar.DATE, +1);
                 date.setText(mFormat.format(cal.getTime()));
-
+                //MainFragment.setBarChart();
             }
         });
 
@@ -73,36 +82,6 @@ public class MainActivity<itemModel> extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new ItemSelectedListener());
-    }
-
-    BarChart chart1;
-
-    public void initView(View v) {
-
-        chart1 = (BarChart)v.findViewById(R.id.chart1);
-
-    }
-
-    // 막대 차트 설정
-    private void setBarChart(List<itemModel> itemList2) {
-
-        chart1.clearChart();
-
-        chart1.addBar(new BarModel(2.7f, 0xFF123456));
-        chart1.addBar(new BarModel("13", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("14", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("15", 20f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("16", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("17", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("11", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("13", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("17", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("15", 20f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("19", 10f, 0xFF56B7F1));
-        chart1.addBar(new BarModel("17", 10f, 0xFF56B7F1));
-
-        chart1.startAnimation();
-
     }
 
     class ItemSelectedListener implements BottomNavigationView.OnNavigationItemSelectedListener{
